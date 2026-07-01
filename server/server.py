@@ -1,3 +1,26 @@
+"""
+server.py
+
+This file implements the server side of the Online Chat Room application.
+
+The server listens for incoming TCP client connections and handles each
+connected client in a separate thread. Clients communicate with the server
+using JSON-formatted command messages for login, public messaging, direct
+messaging, and exiting the chat room.
+
+The server is responsible for:
+1. Registering new users and validating returning users using credentials
+   stored in users.json.
+2. Maintaining a thread-safe list of currently active clients.
+3. Broadcasting public messages to connected users.
+4. Forwarding direct messages to a specific active user.
+5. Removing users when they exit or disconnect.
+6. Sending updated active-user lists whenever users log in or log out.
+
+Thread locks are used to protect shared resources such as the active client
+list and the users.json file so that multiple client threads can safely access
+and update them at the same time.
+"""
 import socket
 import threading
 import json
@@ -155,7 +178,7 @@ def handle_login(client_socket):
 def handle_client(client_socket, client_address):
     """
     Handles one connected client.
-    This function runs inside its own thread.
+    Note: This function runs inside its own thread.
     """
     username = None
 

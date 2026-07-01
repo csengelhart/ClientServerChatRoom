@@ -1,3 +1,25 @@
+"""
+client.py
+
+This file implements the client side of the Online Chat Room application.
+
+The client connects to the chat server using a TCP socket and communicates
+with the server using JSON-formatted messages. After connecting, the client
+prompts the user to log in with a username and password. Once logged in, the
+client allows the user to send public messages, direct messages, or exit the
+chat room.
+
+The client uses two threads:
+1. A listener thread that continuously receives messages from the server,
+   including public messages, direct messages, active user updates, errors,
+   and informational responses.
+2. An input thread that continuously prompts the user for chat operations
+   such as PM, DM, or EX.
+
+This multithreaded design allows the client to receive incoming messages while
+the user is typing commands or composing messages.
+"""
+
 import socket
 import threading
 import json
