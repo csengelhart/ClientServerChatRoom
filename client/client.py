@@ -3,7 +3,7 @@ import threading
 import json
 
 HOST = "127.0.0.1"
-PORT = 77777
+PORT = 12345
 
 running = True
 

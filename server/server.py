@@ -4,8 +4,9 @@ import json
 import os
 
 HOST = "127.0.0.1"
-PORT = 12345
-USERS_FILE = "users.json"
+PORT =  12345
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+USERS_FILE = os.path.join(BASE_DIR, "users.json")
 
 active_clients = {}
 clients_lock = threading.Lock()
